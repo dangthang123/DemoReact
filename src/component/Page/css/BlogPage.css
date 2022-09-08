@@ -1,0 +1,91 @@
+/* *,
+*:before,
+*:after {
+    box-sizing: inherit;
+} */
+
+.about-blog {
+    margin-top: 50px;
+}
+
+.blog-column {
+    float: left;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+.blog-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+}
+
+.blog-about-section {
+    padding: 50px;
+    text-align: center;
+    align-items: center;
+    background-color: #474e5d;
+    color: white;
+}
+
+.containers {
+    display: block;
+    display: -webkit-box;
+    font-size: 16px;
+    line-height: 1.3;
+    -webkit-line-clamp: 4;
+    /* số dòng hiển thị */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.blog-row {
+    margin-top: 20px;
+}
+
+.containers::after,
+.blog-row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.blog-title {
+    margin-top: 10px;
+    color: rgb(18, 17, 17);
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-seri
+}
+
+
+
+.blog-page-detail-contentitle img {
+    display: block;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-right: auto;
+    width: 70%;
+    height: 70%;
+}
+
+.containers img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.onClick:hover {
+    text-decoration: underline;
+    color: red;
+}
+
+p.onClick {
+    margin-left: 18px;
+    /* margin-bottom: 3px; */
+    padding-bottom: 5px;
+    color: rgb(62, 77, 203);
+}

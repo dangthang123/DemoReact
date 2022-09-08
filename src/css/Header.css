@@ -1,0 +1,408 @@
+.header-container-top {
+    background-color: rgb(34, 34, 34);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 47px;
+}
+
+.header-container-top-right {
+    display: flex;
+    padding-right: 27px;
+    padding-top: 12px;
+}
+
+.header-container-top-right-1 {
+    display: flex;
+    padding-right: 30px;
+    column-gap: 5px;
+    padding-bottom: 18px;
+
+}
+
+.header-container-top-right-1 a {
+    font-weight: 600;
+    color: #525252;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header-container-top-right-1 a:hover {
+    color: #fff;
+}
+
+.header-container-top-right-2 {
+    display: flex;
+    column-gap: 5px;
+
+}
+
+.header-container-top-right-2 a {
+    font-weight: 600;
+    color: #525252;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header-container-top-right-2 a:hover {
+    color: #fff;
+}
+
+#img2 {
+    font-size: 14px;
+    color: #525252;
+    padding-top: 2.5px;
+}
+
+#img3 {
+    font-size: 14px;
+    color: #525252;
+    padding-top: 2.5px;
+}
+
+#img1 {
+    display: flex;
+    column-gap: 4px;
+    padding-top: 16px;
+    margin-left: 30px;
+    padding-bottom: 18px;
+    color: #525252;
+    font-size: 14px;
+}
+
+#img1 p {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header-bottom {
+    position: relative;
+    height: 80px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.header-bottom-container {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+
+}
+
+.header-logo {
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.header-logo a li {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 4px;
+    letter-spacing: 15px;
+    padding-left: 15px;
+    border: 2px solid black;
+    width: 200px;
+    height: 39px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header-menu ul {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-left: 58px;
+    word-spacing: 5px;
+    margin-right: 112px;
+    font-size: 14px;
+    font-weight: bold;
+    column-gap: 14px;
+}
+
+.header-menu ul li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 10px 20px 0px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    /* //tren-phai-duoi-trai */
+}
+
+.header-menu ul li a:hover {
+    color: #9377bf;
+}
+
+#search-box {
+    background: #ffffff;
+    position: absolute;
+    top: 18px;
+    transition: all 0.3s ease-in-out;
+
+}
+
+datalist {
+    display: none;
+}
+
+/* #search-box-mobi {
+    display: none;
+    background: #ffffff;
+} */
+
+/* #search-text-mobi {
+    outline: none;
+    padding: 5px 5px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 30px;
+} */
+
+#search-text {
+    outline: none;
+    padding: 5px 5px;
+    font-size: 15px;
+    border: 2px solid black;
+    border-radius: 30px;
+    /* display: none; */
+    /* bottom: -8px; */
+    top: -9%;
+
+}
+
+#search-btn {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 13px;
+
+}
+
+
+
+/* #search-btn-mobi {
+    cursor: pointer;
+    background-color: #fff;
+    border: none;
+
+} */
+
+/* #search-btn-mobi i:hover {
+    color: #9377bf;
+} */
+
+.show-item-search {
+    position: absolute;
+    z-index: 5;
+    top: 70px;
+    right: 235px;
+    width: 380px;
+}
+
+.item-show:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.item-show:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+
+img.show-img {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.link-img-show {
+    width: 60%;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.show-name:hover {
+    color: #151414;
+    text-decoration: underline;
+}
+
+.show-price:hover {
+    text-decoration: underline;
+    color: #151414;
+}
+
+span.show-price {
+    margin-top: 20px;
+    margin-left: 5px;
+}
+
+.item-show {
+    /* box-shadow: 0px 3px 2px 3px #e0e0e0; */
+    display: flex;
+    padding-top: 10px;
+    background-color: #e0e0e0;
+    border: 1px solid black;
+    /* border-radius: 10px; */
+    padding-left: 20px;
+}
+
+.item-show:hover {
+    background-color: #78909c;
+    cursor: pointer;
+    color: #151414;
+}
+
+
+#search-btn i:hover {
+    color: #9377bf;
+}
+
+#search-btn i {
+    font-size: 14px;
+}
+
+/* #search-btn-mobi i {
+    font-size: 14px;
+} */
+
+#imgmagnifying:hover {
+    color: #9377bf;
+}
+
+.header-Cart-wish {
+    display: flex;
+    margin-right: 30px;
+    margin-top: 20px;
+    position: relative;
+}
+
+#Wish {
+    margin-top: 5px;
+    margin-right: 28px;
+    font-size: 30px;
+}
+
+.Wish-List {
+    display: none;
+    z-index: 2;
+    top: 150%;
+    left: -305%;
+    position: absolute;
+    background: #fff;
+    width: 360px;
+    height: auto;
+    border: 1px solid #151414;
+    border-radius: 10px;
+}
+
+.Wish-List hr {
+    width: 100%;
+}
+
+.Wish-item {
+    display: flex;
+    padding: 10px 0 5px 5px;
+}
+
+.Wish-item:hover {
+    background-color: rgb(223, 133, 133);
+}
+
+.Wish-item img {
+    width: 70px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.Wish-item p {
+    margin-left: 5px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    word-spacing: 2px;
+}
+
+#Wish:hover {
+    color: red;
+}
+
+#Cart {
+    margin-top: 5px;
+    font-size: 30px;
+}
+
+.Cart-List {
+    display: none;
+    width: 350px;
+    height: auto;
+    background-color: #fff;
+    z-index: 2;
+    position: absolute;
+    top: 102%;
+    right: -18%;
+    border-radius: 10px;
+    border: 1px solid #424242;
+}
+
+.Cart-List hr {
+    width: 100%;
+
+}
+
+.Cart-item {
+    display: flex;
+}
+
+.Cart-item:hover {
+    background-color: rgb(219, 144, 144);
+}
+
+.Cart-item img {
+    width: 70px;
+    height: auto;
+    border-radius: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.Cart-item-tille {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px 0 0 10px;
+}
+
+/* #Cart:hover {
+    display: block;
+    color: #f8ba04;
+} */
+
+span.cart-number {
+    position: absolute;
+    background: red;
+    width: 15px;
+    left: 60%;
+    text-align: center;
+    border-radius: 50%;
+    color: white;
+}
+
+li.btn-cart {
+    position: relative;
+}
+
+li.btn-wish {
+    position: relative;
+}
+
+span.wish-number {
+    position: absolute;
+    left: 40%;
+    background-color: red;
+    width: 15px;
+    text-align: center;
+    color: white;
+    border-radius: 50%;
+}

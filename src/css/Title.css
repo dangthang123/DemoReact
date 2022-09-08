@@ -1,0 +1,27 @@
+.tille-item {
+    margin-top: 75px;
+}
+
+.tille-item-1 {
+    margin-top: -5px;
+    margin-left: 1px;
+    color: #8262b5;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 5px;
+    font-weight: bold;
+}
+
+.tille-item-2 {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+}
+
+.tille-hr {
+    width: 50px;
+    background-color: #8262b5;
+    margin-top: 22px;
+}

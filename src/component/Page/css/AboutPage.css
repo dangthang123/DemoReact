@@ -1,0 +1,83 @@
+/* *,
+*:before,
+*:after {
+    box-sizing: inherit;
+} */
+
+.about-page {
+    margin-top: 50px;
+}
+
+.page-column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+.page-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+}
+
+.page-about-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+}
+
+.containers-about {
+    padding: 0 16px;
+}
+
+.containers-about a p:hover {
+    color: blueviolet;
+    text-decoration: underline;
+}
+
+.containers-about::after,
+.page-row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.page-title {
+    color: grey;
+    font-family: 'Montserrat', sans-seri
+}
+
+.blog-page-detail {
+    margin-top: 50px;
+}
+
+.blog-page-detail-name {
+    font-size: 45px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-seri;
+
+}
+
+.blog-page-detail-title {
+    color: rgb(66, 66, 66);
+    font-size: 20px;
+    margin-bottom: 15px;
+    word-spacing: 1.5px;
+    line-height: 2px;
+}
+
+.blog-page-detail-img {
+    width: 100%;
+}
+
+.blog-page-detail-contentitle {
+    margin-top: 10px;
+    margin-bottom: 50px;
+    color: rgb(66, 66, 66);
+    font-size: 20px;
+    word-spacing: 1.5px;
+    line-height: 30px;
+
+}

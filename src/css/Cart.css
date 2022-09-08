@@ -1,0 +1,121 @@
+button.btn-clear {
+    font-size: 20px;
+    background-color: #eeeeee;
+    width: 112px;
+}
+
+.btn-clear:hover {
+    cursor: pointer;
+    background-color: red;
+}
+
+.cart-item {
+    display: flex;
+    height: 180px;
+}
+
+.cart-item {
+    display: flex;
+    height: 180px;
+    margin-top: 50px;
+    column-gap: 30px;
+    box-shadow: 0px 3px 5px 2px #57415a;
+    width: 80%;
+    margin-left: 135px;
+}
+
+button.btn-remove {
+    width: 20px;
+    border: none;
+    background: none;
+    border-right: 1px solid;
+
+}
+
+.btn-remove:hover {
+    cursor: pointer;
+    background-color: #90a4ae;
+
+}
+
+button.btn-add {
+    width: 20px;
+    border: none;
+    background: none;
+    border-left: 1px solid;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    cursor: pointer;
+    background-color: #90a4ae;
+
+}
+
+.item-function {
+    display: flex;
+    height: 23px;
+    column-gap: 10px;
+    margin-top: 60px;
+    border: 1px solid black;
+}
+
+.item-name {
+    width: 30%;
+    margin-top: 60px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    ;
+}
+
+img.item-img {
+    margin: 10px 10px;
+}
+
+.item-price {
+    margin-top: 60px;
+    font-size: 20px;
+}
+
+button.btn-remove-item {
+    height: 24px;
+    width: 71px;
+    margin-top: 60px;
+    font-size: 16px;
+}
+
+.btn-remove-item:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+.price-total-name {
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-clear-price {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    width: 90%;
+}
+
+.cart-noo {
+    font-size: 20px;
+}
+
+.price-total-price {
+    margin-left: 5px;
+    color: red;
+}
+
+.cart {
+    margin-bottom: 50px;
+}
+
+.item-quantity {
+    font-weight: 600;
+}

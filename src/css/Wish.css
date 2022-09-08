@@ -1,0 +1,59 @@
+.wish-list {
+    margin-bottom: 50px;
+}
+
+.wish-item {
+    display: flex;
+    height: 180px;
+    margin-top: 50px;
+    column-gap: 30px;
+    box-shadow: 0px 3px 5px 2px #57415a;
+    width: 80%;
+    margin-left: 135px;
+}
+
+
+.wish-name {
+    width: 30%;
+    margin-top: 60px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    ;
+}
+
+img.wish-img {
+    margin: 10px 10px;
+}
+
+.wish-price {
+    margin-top: 60px;
+    font-size: 20px;
+}
+
+button.btn-remove-wish {
+    height: 24px;
+    width: 71px;
+    margin-top: 60px;
+    font-size: 16px;
+}
+
+.btn-remove-wish:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+.cart-noo {
+    font-size: 20px;
+}
+
+button.btn-add-to-cart-wish {
+    height: 25px;
+    width: 104px;
+    margin-top: 60px;
+}
+
+button.btn-add-to-cart-wish:hover {
+    cursor: pointer;
+    background-color: red;
+}
