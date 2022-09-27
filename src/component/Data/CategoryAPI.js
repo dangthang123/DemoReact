@@ -39,12 +39,14 @@ function CategoryPageAPI() {
   const [categoryApi, setCategoryApi] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost/dataWP/graphql/', {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: GRAPHQL_API_CATEGORY_URL })
+    // fetch('https://72.arrowhitech.net/tn3/reactjs_thang/backend/graphql/',
+    fetch('http://localhost/dataWP/graphql/',
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: GRAPHQL_API_CATEGORY_URL })
 
-    }).then((response) => response.json())
+      }).then((response) => response.json())
       .then((data) => setCategoryApi(data.data.productCategories.nodes))
   }, [])
   return categoryApi;

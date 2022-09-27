@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Link, Route, Routes } from 'react-router-dom';
-import CategoryPageAPI from '../Data/CategoryAPI';
-import PostAPI from '../Data/PostAPI';
+import { listcategoryproduct, listmenu, listpost, listproduct } from '../Redux/Api/FecthData';
+import MenuAPI from '../Data/MenuAPI';
 import dataProduct from '../Data/ProductNewAPI';
-// import FooterSliderDetail from '../Footer/FooterSlider/FooterSliderDetail';
 import AboutPage from '../Page/AboutPage';
 import BlogPage from '../Page/BlogPage';
 import BlogPageDetail from '../Page/BlogPages/BlogPageDetail';
@@ -16,19 +16,24 @@ import HomePage from '../Page/HomePage';
 import NotFound from '../Page/NotFound';
 import Productdetail from '../Product/ProductItem/ProductDetalis';
 import WishPageDetali from '../Wish/WishPageDetali';
+import Checkout from '../Page/Checkout/Checkout';
 
 
-export default function HeaderBottom() {
+function HeaderBottom(props) {
+    // console.log(props.items.carts.length);
     // ++++ MOBI+++
     const [showMenuMobi, setShowMenuMobi] = useState(true);
 
     // +++Search+++
-    const dtP = dataProduct();
-    const dataProductPage = dtP;
 
-
-    // const dtW = dataWomen();
-    // const datawomenpage = dtW;
+    const dispatchProduct = useDispatch();
+    const productList = useSelector((state) => state.cartlist);
+    // console.log(productList);
+    const { loadingProduct, errorProduct, products } = productList;
+    //  
+    useEffect(() => {
+        dispatchProduct(listproduct());
+    }, [dispatchProduct])
     // ++++Show+++
     const [showSearch, setshowSearch] = useState(false);
     // +++Filter+++
@@ -40,76 +45,35 @@ export default function HeaderBottom() {
         setsearchItem(searchTerm);
         // console.log(searchTerm);
     }
-    // ++++++ADD TO CART+++++
-    const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItem') || '[]'); //save cart from local storage
-    const [cartItem, setCartItem] = useState(cartFromLocalStorage);
-    useEffect(() => {
-        localStorage.setItem('cartItem', JSON.stringify(cartItem));
-    }, [cartItem]); //save cart from local storage
-
-    const handleAddtoCart = (product) => {
-        alert('Add to cart');
-        const ProductExist = cartItem.find((item) => item.id === product.id);
-        if (ProductExist) {
-            setCartItem(cartItem.map((item) => item.id === product.id ?
-                { ...ProductExist, quantity: ProductExist.quantity + 1 } : item));
-        }
-        else {
-            setCartItem([...cartItem, { ...product, quantity: 1 }]);
-        }
-
-    }
-    const handleRemovetoCart = (product) => {
-        const ProductExist = cartItem.find((item) => item.id === product.id);
-        if (ProductExist.quantity === 1) {
-            setCartItem(cartItem.filter((item) => item.id !== product.id));
-        } else {
-            setCartItem(cartItem.map((item) =>
-                item.id === product.id
-                    ? { ...ProductExist, quantity: ProductExist.quantity - 1 }
-                    : item));
-        }
-    }
-    const handleCleartoCart = () => {
-        setCartItem([]);
-    }
-    const handleRemoveItem = (id) => {
-        alert('Remove product item');
-        const arr = cartItem.filter((item) => item.id !== id);
-        setCartItem(arr);;
-    };
-
-    //  ++++++ADD TO WISH+++++
-    const wishFromLocalStorage = JSON.parse(localStorage.getItem('wishItem') || '[]'); //save wish from local storage
-    const [wishItem, setWishItem] = useState(wishFromLocalStorage);
-    useEffect(() => {
-        localStorage.setItem('wishItem', JSON.stringify(wishItem));
-    }, [wishItem]);
-
-    const handleAddtoWish = (wish) => {
-        alert('Add to wish');
-        const WishExist = wishItem.find((itemwish) => itemwish.id === wish.id);
-        if (WishExist) {
-            setWishItem(wishItem.map((itemwish) => itemwish.id === wish.id ?
-                { ...WishExist, quantity: WishExist.quantity + 1 } : itemwish));
-        }
-        else {
-            setWishItem([...wishItem, { ...wish, quantity: 1 }]);
-        }
-    }
-    const handleRemoveWish = (id) => {
-        alert('Remove wish item');
-        const arr = wishItem.filter((item) => item.id !== id)
-        setWishItem(arr);
-    };
-
     // ++++Product Category++++
-    const dataCategoryAPI = CategoryPageAPI();
-    const dataCategory = dataCategoryAPI;
 
-    // ++++ POST (BLOG)++++
-    const dataBlogAPI = PostAPI();
-    const dataBlog = dataBlogAPI;
+    const dispatch = useDispatch();
+    const productcategory = props.items.productcategory;
+    // console.log(productcategory);
+    // const productCategory = useSelector((state) => state.cartlist);
+    // const { loading, error, productcategory } = productCategory;
+    useEffect(() => {
+        dispatch(listcategoryproduct());
+    }, [dispatch])
+
+    // ++++ POST (BLOG)+++
+    const dispatchPost = useDispatch();
+    const post = props.items.post;
+    // console.log(post);
+    // const postList = useSelector((state) => state.cartlist);
+    // const { loadingPost, errorPost, post } = postList;
+    // console.log(productcategory);
+    useEffect(() => {
+        dispatchPost(listpost());
+    }, [dispatchPost])
+
+    // +++ MENU +++
+    const dispatchMenu = useDispatch();
+    const dataMenu = props.items.menus;
+    useEffect(() => {
+        dispatchMenu(listmenu());
+    }, [dispatchMenu])
+
     return (
         <div className="header-bottom">
             <div className="header-bottom-container">
@@ -124,16 +88,20 @@ export default function HeaderBottom() {
                     {showMenuMobi ?
                         <ul>
                             <li><Link to="">HOME</Link></li>
-                            {dataCategory.sort((a, b) => a.id > b.id ? 1 : -1).map((item) => (
+
+                            {productcategory.sort((a, b) => a.id > b.id ? 1 : -1).map((item) => (
                                 <li key={item.id}><Link to={`/${item.slug}`}>{item.name}</Link></li>
                             )).slice(0, 2)}
 
-                            <li><Link to="/AboutUs">ABOUT US</Link></li>
+                            <li><Link to="/about-us">ABOUT US</Link></li>
 
-                            {dataBlog.sort((a, b) => a.id < b.id ? 1 : -1).map((item) => (
+                            {post.sort((a, b) => a.id > b.id ? 1 : -1).map((item) => (
                                 <li key={item.id}> <Link to={`/post/${item.slug}`}>{item.name}</Link></li>
                             )).slice(0, 1)}
-                            <li><Link to="/collectionn">COLLECTION</Link></li>
+                            {/* {dataMenu.sort((a, b) => a.id < b.id ? 1 : -1).map((item) => (
+                                <li key={item.id}><Link to={`${item.uri}`}>{item.label}</Link></li>
+                            ))} */}
+                            <li><Link to="/collection">COLLECTION</Link></li>
                             <li><Link to="/contact">CONTACT</Link></li>
 
                             <li>
@@ -151,7 +119,7 @@ export default function HeaderBottom() {
 
                                 </div>
                                 <div className="show-item-search">
-                                    {dataProductPage
+                                    {products
                                         .filter((item) => {
                                             const searchTerm = searchItem.toLowerCase();
 
@@ -181,13 +149,18 @@ export default function HeaderBottom() {
                 <div className="header-Cart-wish">
                     <li className='btn-wish'>
                         <Link to="/Wish"><i className="pe-7s-like" id="Wish"></i>
-                            <span className='wish-number'>{wishItem.length === 0 ? "" : wishItem.length}</span>
+                            {/* <span className='wish-number'>{wishItem.length === 0 ? "" : wishItem.length}</span> */}
+                            {/* <span className='wish-number'>{props.numberWish === 0 ? "" : props.numberWish}</span> */}
+                            <span className='wish-number'>{props.items.wishs.length === 0 ? "" : props.items.wishs.length}</span>
+
                         </Link>
                     </li>
 
                     <li className='btn-cart'>
                         <Link to="/Cart"><i className="pe-7s-cart" id="Cart"></i>
-                            <span className='cart-number'>{cartItem.length === 0 ? "" : cartItem.length}</span>
+                            {/* <span className='cart-number'>{cartItem.length === 0 ? "" : cartItem.length}</span> */}
+                            {/* <span className='wish-number'>{props.numberWish === 0 ? "" : props.numberWish}</span> */}
+                            <span className='cart-number'>{props.items.carts.length === 0 ? "" : props.items.carts.length}</span>
                         </Link>
                     </li>
 
@@ -195,54 +168,43 @@ export default function HeaderBottom() {
             </div>
             <Routes>
                 <Route path="" element={<HomePage
-                    cartItem={cartItem}
-                    handleAddtoCart={handleAddtoCart}
                 />}></Route>
 
                 <Route path="*" element={<NotFound to="notfound" />} />
                 {/* <Route path="/*" element={<Navigate to="not-found" />} /> */}
 
+                <Route path="/:slug" element={<CategoryPage />}></Route>
 
-                <Route path="/:slug" element={<CategoryPage
-                    cartItem={cartItem}
-                    handleAddtoCart={handleAddtoCart}
-                />}></Route>
-
-
-                <Route path="/AboutUs" element={<AboutPage />}></Route>
+                <Route path="/about-us" element={<AboutPage />}></Route>
                 <Route path="/post/:slug" element={<BlogPage />}></Route>
-                <Route path="/Contact" element={<ContactPage />}></Route>
+                <Route path="/contact" element={<ContactPage />}></Route>
                 {/* <Route path="/Search" element={<SearchBox />}></Route> */}
 
-                <Route path="/collectionn" element={<CollectionPage />}></Route>
+                <Route path="/collection" element={<CollectionPage />}></Route>
 
-                <Route path="/:name/:id" element={<Productdetail
-                    cartItem={cartItem} wishItem={wishItem}
-                    handleAddtoCart={handleAddtoCart}
-                    handleAddtoWish={handleAddtoWish}
-                />}></Route>
+                <Route path="/:name/:id" element={<Productdetail />}></Route>
 
                 <Route path="/posts/:title" element={<BlogPageDetail />}></Route>
 
                 {/* <Route path="/Blogs/:name/:id" element={<FooterSliderDetail />}></Route> */}
 
-                <Route path="/Cart" element={<CartPageDetali
-                    cartItem={cartItem}
-                    handleAddtoCart={handleAddtoCart}
-                    handleRemovetoCart={handleRemovetoCart}
-                    handleCleartoCart={handleCleartoCart}
-                    handleRemoveItem={handleRemoveItem}
-                />}></Route>
+                <Route path="/Cart" element={<CartPageDetali />}></Route>
 
-                <Route path="/Wish" element={<WishPageDetali
-                    wishItem={wishItem} cartItem={cartItem}
-                    handleAddtoWish={handleAddtoWish}
-                    handleRemoveWish={handleRemoveWish}
-                    handleAddtoCart={handleAddtoCart}
-                />}></Route>
+                <Route path="/Wish" element={<WishPageDetali />}></Route>
+
+                {/* <Route path="/checkout" element={<Checkout />}></Route> */}
 
             </Routes>
         </div>
 
     )
 }
+const mapStateToProps = (state) => {
+    // console.log(state);
+    return {
+        items: state.cartlist,
+        numberCart: state.cartlist.numberCart,
+        numberWish: state.cartlist.numberWish
+    }
+}
+export default connect(mapStateToProps)(HeaderBottom);

@@ -17,11 +17,11 @@ button.btn-clear {
 .cart-item {
     display: flex;
     height: 180px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     column-gap: 30px;
     box-shadow: 0px 3px 5px 2px #57415a;
-    width: 80%;
-    margin-left: 135px;
+    width: 100%;
+    margin-left: 80px;
 }
 
 button.btn-remove {
@@ -66,16 +66,17 @@ button.btn-add {
     font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
-    ;
 }
 
 img.item-img {
     margin: 10px 10px;
+    width: 13%;
 }
 
 .item-price {
     margin-top: 60px;
     font-size: 20px;
+    width: 15%;
 }
 
 button.btn-remove-item {
@@ -101,6 +102,7 @@ button.btn-remove-item {
     justify-content: space-between;
     margin-top: 50px;
     width: 90%;
+    margin-bottom: 20px;
 }
 
 .cart-noo {
@@ -118,4 +120,11 @@ button.btn-remove-item {
 
 .item-quantity {
     font-weight: 600;
+}
+
+.item-total-price {
+    margin-top: 61px;
+    width: 8%;
+    font-size: 20px;
+    margin-left: 48px;
 }

@@ -1,9 +1,15 @@
-import React from 'react';
-import AboutPageAPI from '../../Data/AboutPageAPI';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { listabout } from '../../Redux/Api/FecthData';
 
-function AboutPageItem() {
-    const useF = AboutPageAPI();
-    const aboutpagelist = useF;
+function AboutPageItem(props) {
+    const dispatchAbouts = useDispatch();
+    // console.log(props.abouts);
+    const aboutpagelist = props.items.abouts;
+    // console.log(aboutpagelist);
+    useEffect(() => {
+        dispatchAbouts(listabout());
+    }, [dispatchAbouts])
     return (
         <div className="page-row">
             {aboutpagelist.map(aboutpage => (
@@ -23,5 +29,10 @@ function AboutPageItem() {
         </div>
     );
 }
-
-export default AboutPageItem;
+const mapStateToProps = (state) => {
+    // console.log(state);
+    return {
+        items: state.cartlist
+    }
+}
+export default connect(mapStateToProps)(AboutPageItem);

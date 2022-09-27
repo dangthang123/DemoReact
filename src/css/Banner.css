@@ -1,33 +1,36 @@
 .banner-container {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 750px 360px;
+    grid-template-rows: auto;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    grid-template-areas:
+        "aa ab"
+        "aa ac";
+
 }
 
-.banner {
-    display: flex;
-    justify-content: space-between;
-    column-gap: 30px;
-    flex-wrap: wrap;
+.banner-main {
     position: relative;
+    height: 100%;
 }
 
-.banner-left {
-    overflow: hidden;
-    position: relative;
-    width: 750px;
-    background-color: #eeeeee;
-}
-
-#img-banner-left {
+.img-banner {
     width: 100%;
-    position: absolute;
-    z-index: 1;
+    height: 100%;
 }
 
-h2.banner-left-tille-1-1 {
+.banner-main:first-child {
+    height: 750px !important;
+    grid-area: aa;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.banner-main:first-child .banner-tille-1 {
     position: absolute;
-    top: 38%;
+    top: 47%;
     left: 37%;
     font-size: 80px;
     color: #e1e1e1;
@@ -35,33 +38,19 @@ h2.banner-left-tille-1-1 {
     font-family: 'Montserrat', sans-serif;
 }
 
-h3.banner-left-tille-1-2 {
-    top: 50%;
-    position: absolute;
-    left: 53%;
-    font-size: 50px;
-    color: #e1e1e1;
-    font-weight: 500;
-    font-family: 'Montserrat', sans-seri
-}
-
-.banner-right-bottom {
-    margin-top: 27px;
-}
-
-.banner-left-tille-1 {
+.banner-main:first-child .banner-tille-2 {
     font-size: 30px;
     text-align: right;
     bottom: 0;
     left: 0;
     right: 12.5%;
-    top: 54.5%;
+    top: 58.5%;
     z-index: 1;
     position: absolute;
     font-family: 'Pacifico', cursive;
 }
 
-.banner-left-tille-btn {
+.banner-main:first-child .banner-tille-btn {
     left: 73%;
     top: 65%;
     z-index: 1;
@@ -74,15 +63,18 @@ h3.banner-left-tille-1-2 {
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
     cursor: pointer;
-
 }
 
-.banner-right-top {
-    overflow: hidden;
-    position: relative;
+.banner-main:nth-child(2) {
+    height: 360px !important;
+    grid-area: ab;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
 
-.banner-right-top-tille-1 {
+.banner-main:nth-child(2) .banner-tille-1 {
     text-align: left;
     font-weight: 400;
     top: 40%;
@@ -93,10 +85,9 @@ h3.banner-left-tille-1-2 {
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 2.8px;
-
 }
 
-.banner-right-top-tille-2 {
+.banner-main:nth-child(2) .banner-tille-2 {
     text-align: left;
     top: 51%;
     left: 16%;
@@ -107,12 +98,29 @@ h3.banner-left-tille-1-2 {
     font-family: 'Montserrat', sans-serif;
 }
 
-.banner-right-bottom {
-    overflow: hidden;
-    position: relative;
+.banner-main:nth-child(2) .banner-tille-btn {
+    left: 45%;
+    top: 65%;
+    z-index: 1;
+    width: 110px;
+    height: 40px;
+    position: absolute;
+    border: 1px solid #8262b5;
+    background: #8262b5;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
 }
 
-.banner-right-bottom-tille-1 {
+.banner-main:last-child {
+    height: 360px !important;
+    grid-area: ac;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.banner-main:last-child .banner-tille-1 {
     text-align: left;
     font-weight: 400;
     left: 11%;
@@ -125,7 +133,7 @@ h3.banner-left-tille-1-2 {
     font-family: 'Montserrat', sans-serif;
 }
 
-.banner-right-bottom-tille-2 {
+.banner-main:last-child .banner-tille-2 {
     text-align: left;
     left: 11%;
     top: 41%;
@@ -136,17 +144,21 @@ h3.banner-left-tille-1-2 {
     font-family: 'Montserrat', sans-serif;
 }
 
-.banner-right-bottom-btn {
-    left: 11%;
+/* .banner-main:last-child .banner-tille-2 p:nth-child(1) {
+    color: red;
+} */
+
+.banner-main:last-child .banner-tille-btn {
+    left: 45%;
+    top: 65%;
     z-index: 1;
-    top: 53%;
-    position: absolute;
-    border: #8262b5 solid 1px;
-    background-color: #8262b5;
-    color: #ffffff;
     width: 110px;
     height: 40px;
-    cursor: pointer;
+    position: absolute;
+    border: 1px solid #8262b5;
+    background: #8262b5;
+    color: #ffffff;
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
 }

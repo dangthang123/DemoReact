@@ -21,7 +21,7 @@
 .product-item-img-btn {
     z-index: 1;
     position: absolute;
-    top: 68%;
+    top: 66%;
     left: 3%;
     width: 116px;
     height: 38px;
@@ -152,9 +152,9 @@ button.btn-add-to-wish-detalis {
 
 .paginationBttns a {
     padding: 10px;
-    margin: 8px;
-    border-radius: 5px;
-    border: 1px solid #78909c;
+    margin: 5px;
+    /* border-radius: 50%; */
+    /* border: 1px solid #78909c; */
     color: #8262b5;
     cursor: pointer;
 }
@@ -171,4 +171,46 @@ button.btn-add-to-wish-detalis {
 
 .paginationDisabled a {
     color: #8262b5;
+}
+
+.comment.container {
+    margin-top: 40px;
+}
+
+.comment-column {
+    margin-top: 20px;
+}
+
+.containers-comment {
+    border: 1px solid #90a4ae;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+}
+
+.comment-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+h2.comment-title {
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+.logosale {
+    position: absolute;
+    right: 145px;
+    width: 50%;
+    top: -17px;
+}
+
+.product-item:hover {
+    box-shadow: 5px 8px 24px 5px rgb(107, 107, 112);
+    -webkit-box-shadow: 5px 8px 24px 5px rgb(107, 107, 112);
+    transform: scale(1.05);
+
+}
+
+.product-item:hover .product-item-content {
+    margin-left: 5px;
 }

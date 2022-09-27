@@ -30,11 +30,13 @@ function PostAPI() {
   const [launches, setLaunches] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost/dataWP/graphql/', {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: API_POST })
-    }).then((response) => response.json())
+    // fetch('https://72.arrowhitech.net/tn3/reactjs_thang/backend/graphql/',
+    fetch('http://localhost/dataWP/graphql/',
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: API_POST })
+      }).then((response) => response.json())
       .then((launches) => setLaunches(launches.data.categories.nodes))
   }, []);
   return launches;

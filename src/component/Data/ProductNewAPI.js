@@ -12,6 +12,16 @@ const GRAPHQL_API_PRODUCTNEW_URL = `
       }
       reviews {
         averageRating
+        nodes {
+          id
+          author {
+            node {
+              name
+            }
+          }
+          content
+          date
+        }
       }
       ... on SimpleProduct {
         regularPrice(format: RAW)
@@ -28,11 +38,14 @@ function ProductNewAPI() {
   const [productnewApi, setProductNewApi] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost/dataWP/graphql/', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: GRAPHQL_API_PRODUCTNEW_URL }),
-    }).then((response) => response.json())
+    // fetch('https://72.arrowhitech.net/tn3/reactjs_thang/backend/graphql/',
+    fetch('http://localhost/dataWP/graphql/',
+
+      {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: GRAPHQL_API_PRODUCTNEW_URL }),
+      }).then((response) => response.json())
       .then((data) => setProductNewApi(data.data.products.nodes))
   })
   return productnewApi;

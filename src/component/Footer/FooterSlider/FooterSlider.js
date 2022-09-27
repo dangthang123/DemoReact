@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
@@ -6,9 +6,11 @@ import "slick-carousel/slick/slick.css";
 import PostAPI from '../../Data/PostAPI';
 import moment from 'moment';
 import imgNoImage from '../../../img/noimage.jpg';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { listpost } from '../../Redux/Api/FecthData';
 
 
-function FooterSliderItem() {
+function FooterSliderItem(props) {
     var settings = {
         nav: false,
         dots: true,
@@ -45,19 +47,24 @@ function FooterSliderItem() {
         ]
 
     };
-    const useF = PostAPI();
-    // console.log(useF);
-    let footersliderlist = [];
+    // const useF = PostAPI();
+    // // console.log(useF);
+    // let footersliderlist = [];
 
-    useF.map(item => (
+
+    const dispatchPost = useDispatch();
+    const postList = useSelector((state) => state.cartlist);
+    const post = props.items.post;
+    // console.log(post);
+    const { loadingPost } = postList;
+    // console.log(post);
+    useEffect(() => {
+        dispatchPost(listpost());
+    }, [dispatchPost])
+    let footersliderlist = [];
+    post.sort((a, b) => a.id < b.id ? 1 : -1).map(item => (
         footersliderlist = item.posts.nodes
     ))
-    // if (footersliderlist === null && footersliderlist.featuredImage !== undefined) {
-    //     footersliderlist.map((item) => (
-    //         console.log('abc')
-    //     ))
-    // }
-
     return (
         <div className="slide-main container">
             <Slider {...settings}>
@@ -105,5 +112,11 @@ function FooterSliderItem() {
     );
 
 }
+const mapStateToProps = (state) => {
+    // console.log(state);
+    return {
+        items: state.cartlist,
+    }
+}
 
-export default FooterSliderItem;
+export default connect(mapStateToProps)(FooterSliderItem);

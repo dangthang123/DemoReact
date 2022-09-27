@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import womenpagelist from '../../Data/DataWomenPage'
 import CategoryAPI from '../../Data/CategoryAPI';
 import { Link, useParams } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import imgNoImage from '../../../img/noimage.jpg';
 import { Rating } from '@mui/material';
-function WomenPageItem({ handleAddtoCart }) {
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { listcategoryproduct } from '../../Redux/Api/FecthData';
+import ProductSkeleton from '../Loading/ProductSkeleton';
+import { addtoCartSuccess } from '../../Redux/Action/Action';
+function WomenPageItem(props) {
     const { slug } = useParams();
-    const useF = CategoryAPI();
-
-    let catgorypagelist = useF;
-
-    const thisProduct = catgorypagelist.find((product) => String(product.slug) === slug) || {};
+    const productcategory = props.product.productcategory;
+    const dispatch = useDispatch();
+    const productCategory = useSelector((state) => state.cartlist);
+    const { loading, } = productCategory;
+    // // console.log(productcategory);
+    useEffect(() => {
+        dispatch(listcategoryproduct());
+    }, [dispatch])
+    const thisProduct = productcategory.find((product) => String(product.slug) === slug) || {};
     // console.log(thisProduct);
     let jsonProduct = [];
     if (thisProduct !== null && thisProduct.products !== undefined) {
@@ -19,6 +27,7 @@ function WomenPageItem({ handleAddtoCart }) {
         // console.log(jsonProduct);
         jsonProduct = thisProduct.products.nodes;
     }
+
     const [pageNumber, setPageNumber] = useState(0);
     const usersperPage = 8;         //number of items in a page
     const pagesVisited = pageNumber * usersperPage;
@@ -34,7 +43,7 @@ function WomenPageItem({ handleAddtoCart }) {
                     <div className="product-item-img">
                         <Link to={`/${categorypage.name}/${categorypage.id}`}><img src={categorypage.image.sourceUrl} alt="" /></Link>
 
-                        <Link to="/Cart"><button className="product-item-img-btn" onClick={() => handleAddtoCart(categorypage)}>ADD TO CART</button></Link>
+                        <Link to="/Cart"><button className="product-item-img-btn" onClick={() => props.addtoCartSuccess(categorypage)}>ADD TO CART</button></Link>
                     </div>
                 ) : (
                     <img src={imgNoImage} alt="" style={{ width: '262px', height: '323px' }} />
@@ -83,23 +92,39 @@ function WomenPageItem({ handleAddtoCart }) {
             </div>
         ))
     return (
-        <div className="product-list">
-            {displayUsers}
-            <ReactPaginate
-                previousLabel={'< Prev'}
-                nextLabel={'Next >'}
-                pageCount={pageCount}
-                onPageChange={onPageChange}
-                containerClassName={'paginationBttns'}
-                previousLinkClassName={'previousBttn'}
-                nextLinkClassName={'nextBttn'}
-                disabledClassName={'paginationDisabled'}
-                activeClassName={'paginationActive'}
-            />
-        </div>
+        loading === undefined ? (<ProductSkeleton />) : (
+            <div className="product-list">
+                {displayUsers}
+                <ReactPaginate
+                    previousLabel={<i className="fa-solid fa-chevron-left"></i>}
+                    nextLabel={<i className="fa-solid fa-chevron-right"></i>}
+                    pageCount={pageCount}
+                    onPageChange={onPageChange}
+                    containerClassName={'paginationBttns'}
+                    previousLinkClassName={'previousBttn'}
+                    nextLinkClassName={'nextBttn'}
+                    disabledClassName={'paginationDisabled'}
+                    activeClassName={'paginationActive'}
+                />
+            </div>
+        )
+
 
     );
 
 }
+const mapStateToProps = (state) => {
+    // console.log(state);
+    return {
+        product: state.cartlist
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addtoCartSuccess: (item) => {
+            dispatch(addtoCartSuccess(item))
+        }
+    }
+}
 
-export default WomenPageItem;
+export default connect(mapStateToProps, mapDispatchToProps)(WomenPageItem);

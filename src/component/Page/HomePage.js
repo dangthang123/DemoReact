@@ -6,13 +6,13 @@ import Title from '../Title';
 // import '../../css/Banner.css';
 
 
-export default function HomePage({ handleAddtoCart }) {
+export default function HomePage() {
     return (
         <div>
             <section className="section-main container">
                 <Banner />
                 <Title />
-                <Product handleAddtoCart={handleAddtoCart} />
+                <Product />
             </section>
             <footer className="footer">
                 <Footer />

@@ -382,7 +382,7 @@ span.show-price {
 span.cart-number {
     position: absolute;
     background: red;
-    width: 15px;
+    width: 20px;
     left: 60%;
     text-align: center;
     border-radius: 50%;

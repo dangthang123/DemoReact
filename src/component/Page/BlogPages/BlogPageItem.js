@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 // import data from '../../Data/DataFooterSlider';
 
 import PostAPI from '../../Data/PostAPI';
+import { listpost } from '../../Redux/Api/FecthData';
+import PostSkeleton from '../Loading/PostSkeleton';
 
-function BlogPageItem() {
+function BlogPageItem(props) {
+    // console.log(props);
     const { slug } = useParams();
-    const useF = PostAPI();
-    let title = useF;
-    const thisTitle = title.find((item) => String(item.slug) === slug) || {};
-    // console.log(thisTitle);
-    let jsonTitle = [];
 
+    const dispatchPost = useDispatch();
+    const post = props.items.post;
+    // console.log(post);
+    const postList = useSelector((state) => state.cartlist);
+    // console.log(productList);
+    const { loadingPost } = postList;
+    useEffect(() => {
+        dispatchPost(listpost());
+    }, [dispatchPost])
+    const thisTitle = post.find((item) => String(item.slug) === slug) || {};
+    let jsonTitle = [];
     if (thisTitle !== null && thisTitle.posts !== undefined) {
         // jsonProduct = JSON.stringify(thisProduct.products.nodes);
         jsonTitle = thisTitle.posts.nodes;
@@ -39,23 +49,31 @@ function BlogPageItem() {
             </div>
         ))
     return (
-        <div className="blog-row">
-            {displayUsers}
-            <ReactPaginate
-                previousLabel={'< Prev'}
-                nextLabel={'Next >'}
-                pageCount={pageCount}
-                onPageChange={onPageChange}
-                containerClassName={'paginationBttns'}
-                previousLinkClassName={'previousBttn'}
-                nextLinkClassName={'nextBttn'}
-                disabledClassName={'paginationDisabled'}
-                activeClassName={'paginationActive'}
-            />
-        </div>
+        loadingPost === undefined ? (<PostSkeleton />) : (
+            <div className="blog-row">
+                {displayUsers}
+                <ReactPaginate
+                    previousLabel={<i className="fa-solid fa-chevron-left"></i>}
+                    nextLabel={<i className="fa-solid fa-chevron-right"></i>}
+                    pageCount={pageCount}
+                    onPageChange={onPageChange}
+                    containerClassName={'paginationBttns'}
+                    previousLinkClassName={'previousBttn'}
+                    nextLinkClassName={'nextBttn'}
+                    disabledClassName={'paginationDisabled'}
+                    activeClassName={'paginationActive'}
+                />
+            </div>
+        )
+
     );
 
 
 }
-
-export default BlogPageItem;
+const mapStateToProps = (state) => {
+    // console.log(state);
+    return {
+        items: state.cartlist,
+    }
+}
+export default connect(mapStateToProps)(BlogPageItem);

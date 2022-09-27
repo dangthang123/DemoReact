@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import PostAPI from '../../Data/PostAPI';
 import Footer from '../../Footer';
+import { listpost } from '../../Redux/Api/FecthData';
 
-
-
-
-
-function BlogPageDetail() {
+function BlogPageDetail(props) {
     const { title } = useParams();
-    const dt = PostAPI();
+    // const dt = PostAPI();
+    const dispatchPost = useDispatch();
+    const post = props.items.post;
+    // console.log(post);
+    const postList = useSelector((state) => state.cartlist);
+    // console.log(productList);
+    const { loadingPost } = postList;
+    // console.log(post);
+    useEffect(() => {
+        dispatchPost(listpost());
+    }, [dispatchPost])
     let data = [];
-    dt.map(item => (
+    post.sort((a, b) => a.id < b.id ? 1 : -1).map(item => (
         data = item.posts.nodes
     ))
+    // console.log(data);
     const thisBlog = data.find((blogpage) => String(blogpage.title) === title) || {};
-
+    // console.log(thisBlog.content);
 
     return (
         <div>
@@ -27,5 +35,10 @@ function BlogPageDetail() {
         </div>
     );
 }
-
-export default BlogPageDetail;
+const mapStateToProps = (state) => {
+    // console.log(state);
+    return {
+        items: state.cartlist,
+    }
+}
+export default connect(mapStateToProps)(BlogPageDetail);

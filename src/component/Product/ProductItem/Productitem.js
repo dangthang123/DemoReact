@@ -6,30 +6,55 @@ import { Link } from 'react-router-dom';
 import ProductNewAPI from '../../Data/ProductNewAPI';
 import imgNoImage from '../../../img/noimage.jpg';
 import { Rating } from '@mui/material';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { listproduct } from '../../Redux/Api/FecthData';
+import imagesale from '../../../img/zyro-image.png'
+import ProductSkeleton from '../../Page/Loading/ProductSkeleton';
+import { addtoCartSuccess, fetchDataSuccess } from '../../Redux/Action/Action';
+import { cartReducer } from '../../Redux/Reducer/Reducer';
+// function ProductItem({handleAddtoCart}) {
+function ProductItem(props) {
+    // const dispatch = useDispatch();
+    const productList = useSelector((state) => state.cartlist);
+    const { loading } = productList;
+    // console.log(loading);
+    // console.log(products);
+    // useEffect(() => {
+    //     dispatch(listproduct());
+    // }, [dispatch])
 
 
-function ProductItem({ handleAddtoCart }) {
-
-    const useF = ProductNewAPI();
-    const productlist = useF;
-    // console.log(productlist);
     const [pageNumber, setPageNumber] = useState(0);
     const usersperPage = 8;
     const pagesVisited = pageNumber * usersperPage;
 
-    const pageCount = Math.ceil(productlist.length / usersperPage);
+    const pageCount = Math.ceil(props.product.products.length / usersperPage);
     const onPageChange = ({ selected }) => {
         setPageNumber(selected)
     }
-    const displayUsers = productlist.slice(pagesVisited, pagesVisited + usersperPage)
+    const displayUsers = props.product.products.slice(pagesVisited, pagesVisited + usersperPage)
         .map((product) => (
             <div className="product-item" key={product.id} product={product}  >
 
                 {product.image !== null ? (
-                    <div className="product-item-img">
-                        <Link to={`/${product.name}/${product.id}`}><img src={product.image.sourceUrl} alt="" /></Link>
-                        <Link to="/Cart"><button className="product-item-img-btn" onClick={() => handleAddtoCart(product)} >ADD TO CART</button></Link>
-                    </div>
+                    product.onSale === true ? (
+                        <div className="product-item-img">
+                            <Link to={`/${product.name}/${product.id}`}><img src={product.image.sourceUrl} alt="" />
+                                <img className='logosale' src={imagesale} alt=''></img>
+                            </Link>
+                            {/* <Link to="/Cart"><button className="product-item-img-btn" onClick={() => handleAddtoCart(product)} >ADD TO CART</button></Link> */}
+                            <Link to="/Cart"><button className="product-item-img-btn" onClick={() => props.addtoCartSuccess(product)} >ADD TO CART</button></Link>
+                        </div>
+                    ) : (
+                        <div className="product-item-img">
+                            <Link to={`/${product.name}/${product.id}`}><img src={product.image.sourceUrl} alt="" />
+                            </Link>
+                            {/* <Link to="/Cart"><button className="product-item-img-btn" onClick={() => handleAddtoCart(product)} >ADD TO CART</button></Link> */}
+                            <Link to="/Cart"><button className="product-item-img-btn" onClick={() => props.addtoCartSuccess(product)} >ADD TO CART</button></Link>
+                        </div>
+                    )
+
                 ) : (
                     <img src={imgNoImage} alt="" style={{ width: '262px', height: '323px' }} />
                 )}
@@ -46,10 +71,10 @@ function ProductItem({ handleAddtoCart }) {
                     )}
 
                     {product.featured === true ? (
-                        <Rating defaultValue={product.reviews.averageRating} precision={1} readOnly size='small' />
+                        <Rating defaultValue={product.reviews.averageRating} precision={0.5} readOnly size='small' >{product.reviews.averageRating}</Rating>
 
                     ) : (
-                        <Rating defaultValue={0} precision={1} readOnly size='small' />
+                        <Rating defaultValue={0} precision={0.5} readOnly size='small' />
 
                     )}
                     {/* <div className="product-item-content-icon" >
@@ -78,22 +103,40 @@ function ProductItem({ handleAddtoCart }) {
         ))
 
     return (
-        <div className="product-list">
-            {displayUsers}
-            <ReactPaginate
-                previousLabel={'< Prev'}
-                nextLabel={'Next >'}
-                pageCount={pageCount}
-                onPageChange={onPageChange}
-                containerClassName={'paginationBttns'}
-                previousLinkClassName={'previousBttn'}
-                nextLinkClassName={'nextBttn'}
-                disabledClassName={'paginationDisabled'}
-                activeClassName={'paginationActive'}
-            />
-        </div>
+
+        loading === undefined ? (<ProductSkeleton />) : (
+            <div className="product-list">
+                {displayUsers}
+                <ReactPaginate
+                    previousLabel={<i className="fa-solid fa-chevron-left"></i>}
+                    nextLabel={<i className="fa-solid fa-chevron-right"></i>}
+                    pageCount={pageCount}
+                    onPageChange={onPageChange}
+                    containerClassName={'paginationBttns'}
+                    previousLinkClassName={'previousBttn'}
+                    nextLinkClassName={'nextBttn'}
+                    disabledClassName={'paginationDisabled'}
+                    activeClassName={'paginationActive'}
+                />
+            </div>
+        )
+
 
     );
 }
+const mapStateToProps = (state) => {
+    // console.log(state);
+    return {
+        product: state.cartlist
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addtoCartSuccess: (item) => {
+            dispatch(addtoCartSuccess(item))
+        }
+    }
+}
 
-export default ProductItem;
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItem);
