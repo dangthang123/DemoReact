@@ -192,7 +192,7 @@ function HeaderBottom(props) {
 
                 <Route path="/Wish" element={<WishPageDetali />}></Route>
 
-                {/* <Route path="/checkout" element={<Checkout />}></Route> */}
+                <Route path="/checkout" element={<Checkout />}></Route>
 
             </Routes>
         </div>

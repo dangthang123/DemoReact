@@ -1,6 +1,6 @@
 
 // import './App.css';
-import '../src/css/Responsive.css';
+// import '../src/css/Responsive.css';
 import Banner from "./component/Banner";
 import Footer from "./component/Footer";
 import Header from "./component/Header";

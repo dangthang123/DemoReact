@@ -11,6 +11,24 @@ import { Link } from 'react-router-dom';
 import Checkout from '../Checkout/Checkout';
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
 
+import {
+    MDBBtn,
+    MDBCard,
+    MDBCardBody,
+    MDBCardHeader,
+    MDBCardImage,
+    MDBCol,
+    MDBContainer,
+    MDBIcon,
+    MDBInput,
+    MDBListGroup,
+    MDBListGroupItem,
+    MDBRipple,
+    MDBRow,
+    MDBTooltip,
+    MDBTypography,
+} from "mdb-react-ui-kit";
+
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 // function CartPageDetali({ items, cartItem, handleAddtoCart, handleRemovetoCart, handleCleartoCart, handleRemoveItem }) {
 
@@ -31,9 +49,11 @@ function CartPageDetali({ items, increaseQuantity, decreaseQuantity, deleteItemC
     function TotalPrice(price, tonggia) {
         return Number(price * tonggia).toLocaleString('en-US');
     }
+
+
     // console.log(ListCart);
 
-    const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
+    // const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
     // Supports ESM
 
     // const WooCommerce = new WooCommerceRestApi({
@@ -43,57 +63,57 @@ function CartPageDetali({ items, increaseQuantity, decreaseQuantity, deleteItemC
     //     version: 'wc/v3' // WooCommerce WP REST API version
     // });
 
-    const WooCommerce = new WooCommerceRestApi({
-        url: 'https://72.arrowhitech.net/tn3/reactjs_thang/backend/', // Your store URL
-        consumerKey: 'ck_fbe7aaa0fddce48d19779e7f69c669d4b617d3e5', // Your consumer key
-        consumerSecret: 'cs_28efc0dc44ace202e46c2420f8b7e5462ade95cc', // Your consumer secret
-        version: 'wc/v3' // WooCommerce WP REST API version
-    });
-    const data = {
-        payment_method: "bacs",
-        payment_method_title: "Direct Bank Transfer",
-        set_paid: true,
-        billing: {
-            first_name: "Thang ",
-            last_name: "Doe",
-            address_1: "969 Market",
-            address_2: "",
-            city: "San Francisco",
-            state: "CA",
-            postcode: "94103",
-            country: "US",
-            email: "john.doe@example.com",
-            phone: "(555) 555-5555"
-        },
-        shipping: {
-            first_name: "John",
-            last_name: "Doe",
-            address_1: "969 Market",
-            address_2: "",
-            city: "San Francisco",
-            state: "CA",
-            postcode: "94103",
-            country: "US"
-        },
-        line_items: [
-            {
-                product_id: 93,
-                quantity: 2
-            },
-            {
-                product_id: 22,
-                variation_id: 23,
-                quantity: 1
-            }
-        ],
-        shipping_lines: [
-            {
-                method_id: "flat_rate",
-                method_title: "Flat Rate",
-                total: "10.00"
-            }
-        ]
-    };
+    // const WooCommerce = new WooCommerceRestApi({
+    //     url: 'https://72.arrowhitech.net/tn3/reactjs_thang/backend/', // Your store URL
+    //     consumerKey: 'ck_fbe7aaa0fddce48d19779e7f69c669d4b617d3e5', // Your consumer key
+    //     consumerSecret: 'cs_28efc0dc44ace202e46c2420f8b7e5462ade95cc', // Your consumer secret
+    //     version: 'wc/v3' // WooCommerce WP REST API version
+    // });
+    // const data = {
+    //     payment_method: "bacs",
+    //     payment_method_title: "Direct Bank Transfer",
+    //     set_paid: true,
+    //     billing: {
+    //         first_name: "Thang ",
+    //         last_name: "Doe",
+    //         address_1: "969 Market",
+    //         address_2: "",
+    //         city: "San Francisco",
+    //         state: "CA",
+    //         postcode: "94103",
+    //         country: "US",
+    //         email: "john.doe@example.com",
+    //         phone: "(555) 555-5555"
+    //     },
+    //     shipping: {
+    //         first_name: "John",
+    //         last_name: "Doe",
+    //         address_1: "969 Market",
+    //         address_2: "",
+    //         city: "San Francisco",
+    //         state: "CA",
+    //         postcode: "94103",
+    //         country: "US"
+    //     },
+    //     line_items: [
+    //         {
+    //             product_id: 93,
+    //             quantity: 2
+    //         },
+    //         {
+    //             product_id: 22,
+    //             variation_id: 23,
+    //             quantity: 1
+    //         }
+    //     ],
+    //     shipping_lines: [
+    //         {
+    //             method_id: "flat_rate",
+    //             method_title: "Flat Rate",
+    //             total: "10.00"
+    //         }
+    //     ]
+    // };
 
     // WooCommerce.post("orders", data)
     //     .then((response) => {
@@ -106,67 +126,163 @@ function CartPageDetali({ items, increaseQuantity, decreaseQuantity, deleteItemC
 
     return (
         <div>
+            <section className="h-100 gradient-custom">
+                <MDBContainer className="py-5 h-100">
+                    {items.numberCart === 0 && <div className='cart-noo'>No Item</div>}
+                    <MDBRow className="justify-content-center my-4">
+                        <MDBCol md="8">
+                            <MDBCard className="mb-4">
+                                <MDBCardHeader className="py-3">
+                                    <MDBTypography tag="h5" className="mb-0">
+                                        Cart -{ListCart.length} item
+                                    </MDBTypography>
+                                </MDBCardHeader>
+                                <MDBCardBody>
+                                    {ListCart.map((item, key) => (
+                                        <MDBRow>
+                                            <MDBCol lg="3" md="12" className="mb-4 mb-lg-0">
+                                                <MDBRipple rippleTag="div" rippleColor="light"
+                                                    className="bg-image rounded hover-zoom hover-overlay">
+                                                    {item.image === undefined ? (
+                                                        <img
+                                                            src={item.imagewish}
+                                                            className="w-100" alt='' />
+                                                    ) : (
+                                                        <img
+                                                            src={item.image}
+                                                            className="w-100" alt='' />
+                                                    )}
 
-            <div className='cart container'>
-                <div className="tille-item">
-                    <h3 className="tille-item-2">SHOPPING CART <i className="fa-solid fa-cart-plus" style={{ color: '#f06292' }}></i></h3>
-                    <hr className="tille-hr" />
-                </div>
-                <div className='item-clear-price'>
-                    <div className='item-clear'>
-                        <button className='btn-clear' onClick={() => deleteAllCart(items)}><i className="fa-solid fa-trash-can"></i>Clear cart</button>
-                    </div>
-                    <div className='price-total-name'>
-                        Total Cart:
-                        <div className='price-total-price'>
-                            ${Number(TotalCart).toLocaleString('en-US')}.00
-                        </div>
-                    </div>
-                </div>
+                                                    <a href="#!">
+                                                        <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.2)", }}>
+                                                        </div>
+                                                    </a>
+                                                </MDBRipple>
+                                            </MDBCol>
 
-                {items.numberCart === 0 && <div className='cart-noo'>No Item</div>}
+                                            <MDBCol lg="5" md="6" className=" mb-4 mb-lg-0">
+                                                <p>
+                                                    <strong>{item.name}</strong>
+                                                </p>
+                                                {item.onsale === true ? (
 
-                <div className='cart-list'>
-                    {ListCart.map((item, key) => (
-                        <div key={key} className='cart-item'>
-                            {item.image === undefined ? (
-                                <img src={item.imagewish} alt="" className='item-img'></img>
-                            ) : (
-                                <img src={item.image} alt="" className='item-img'></img>
-                            )}
+                                                    <p>${item.saleprice}.00 </p>
+                                                ) : (
+                                                    <p> ${item.regularprice}.00 </p>
 
-                            <div className='item-name'>{item.name}</div>
-                            {item.onsale === true ? (
-                                <div className='item-price'>${item.saleprice}.00</div>
-                            ) : (
-                                <div className='item-price'> ${item.regularprice}.00</div>
-                            )}
-
-                            <div className='item-function'>
-                                <button className='btn-remove' onClick={() => decreaseQuantity(key)}>-</button>
-                                <div className='item-quantity'>
-                                    {item.quantity}
-                                </div>
-                                <button className='btn-add' onClick={() => increaseQuantity(key)}>+</button>
-                            </div>
-                            {item.onsale === true ? (
-                                <div className='item-total-price'> ${TotalPrice(item.saleprice, item.quantity)} </div>
-                            ) : (
-                                <div className='item-total-price'>${TotalPrice(item.regularprice, item.quantity)} </div>
-                            )}
-
-                            <button className='btn-remove-item' onClick={() => deleteItemCart(key)}>Remove</button>
-                            {/* <button className='btn-checkout-item' onClick={() => checkoutItem(item)}>Checkout</button>
-                            <Checkbox {...label} onClick={() => checkoutItem(item)} />
-                            <Button variant="contained" onClick={() => addtoCartSuccess(item)} >CHECK OUT</Button> */}
-                        </div>
-                    ))}
-                </div>
-                <Button variant="contained">CHECK OUT</Button>
-                <Checkout />
-            </div>
+                                                )}
 
 
+                                                <button className='btn-remove-item' onClick={() => deleteItemCart(key)}>
+                                                    <MDBIcon fas icon="trash" />
+                                                </button>
+
+
+
+                                            </MDBCol>
+                                            <MDBCol lg="4" md="6" className="mb-4 mb-lg-0">
+                                                <div className="d-flex mb-4" style={{ maxWidth: "300px" }}>
+                                                    <MDBBtn className="px-3 me-2" style={{ height: '40px', width: '50px' }} onClick={() => decreaseQuantity(key)}>
+                                                        <MDBIcon fas icon="minus" />
+                                                    </MDBBtn>
+
+                                                    <div className='item-quantity'>
+                                                        {item.quantity}
+                                                    </div>
+
+                                                    <MDBBtn className="px-3 ms-2" style={{ height: '40px', width: '50px' }} onClick={() => increaseQuantity(key)}>
+                                                        <MDBIcon fas icon="plus" />
+                                                    </MDBBtn>
+                                                </div>
+
+                                                <p className="text-start text-md-center">
+                                                    {item.onsale === true ? (
+                                                        <strong>Total:${TotalPrice(item.saleprice, item.quantity)}.00 </strong>
+                                                    ) : (
+                                                        <strong>Total:${TotalPrice(item.regularprice, item.quantity)}.00 </strong>
+
+                                                    )}
+
+                                                </p>
+                                            </MDBCol>
+                                            <hr className="my-4" />
+                                        </MDBRow>
+                                    ))}
+
+
+                                </MDBCardBody>
+                            </MDBCard>
+
+                            <MDBCard className="mb-4">
+                                <MDBCardBody>
+                                    <p>
+                                        <strong>Expected shipping delivery</strong>
+                                    </p>
+                                    <p className="mb-0">12.10.2022 - 14.10.2022</p>
+                                </MDBCardBody>
+                            </MDBCard>
+
+                            <MDBCard className="mb-4 mb-lg-0">
+                                <MDBCardBody>
+                                    <p>
+                                        <strong>We accept</strong>
+                                    </p>
+                                    <MDBCardImage className="me-2" width="45px"
+                                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                                        alt="Visa" />
+                                    <MDBCardImage className="me-2" width="45px"
+                                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                                        alt="American Express" />
+                                    <MDBCardImage className="me-2" width="45px"
+                                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                                        alt="Mastercard" />
+                                    <MDBCardImage className="me-2" width="45px"
+                                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
+                                        alt="PayPal acceptance mark" />
+                                </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
+                        <MDBCol md="4">
+                            <MDBCard className="mb-4">
+                                <MDBCardHeader>
+                                    <MDBTypography tag="h5" className="mb-0">
+                                        Summary
+                                    </MDBTypography>
+                                </MDBCardHeader>
+                                <MDBCardBody>
+                                    <MDBListGroup flush>
+                                        <MDBListGroupItem
+                                            className="d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                            Products
+                                            <span>  ${Number(TotalCart).toLocaleString('en-US')}.00</span>
+                                        </MDBListGroupItem>
+                                        <MDBListGroupItem className="d-flex justify-content-between align-items-center px-0">
+                                            Shipping
+                                            <span>Gratis</span>
+                                        </MDBListGroupItem>
+                                        <MDBListGroupItem
+                                            className="d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                            <div>
+                                                <strong>Total amount</strong>
+                                                <strong>
+                                                    <p className="mb-0">(including VAT)</p>
+                                                </strong>
+                                            </div>
+                                            <span>
+                                                <strong>${Number(TotalCart).toLocaleString('en-US')}.00</strong>
+                                            </span>
+                                        </MDBListGroupItem>
+                                    </MDBListGroup>
+
+                                    <Link to='/checkout'><MDBBtn block size="lg">
+                                        Go to checkout
+                                    </MDBBtn></Link>
+                                </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+            </section>
 
             <FooterBottom />
         </div>

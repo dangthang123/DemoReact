@@ -80,15 +80,19 @@ img.item-img {
 }
 
 button.btn-remove-item {
-    height: 24px;
-    width: 71px;
-    margin-top: 60px;
+    height: 40px;
+    width: 40px;
+    margin-top: 20px;
     font-size: 16px;
+    border: navajowhite;
+    background: #0d6efd;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
-.btn-remove-item:hover {
-    background-color: red;
-    cursor: pointer;
+button.btn-remove-item i {
+    font-size: 20px;
+    color: #eeeeee;
 }
 
 .price-total-name {
@@ -127,4 +131,12 @@ button.btn-remove-item {
     width: 8%;
     font-size: 20px;
     margin-left: 48px;
+}
+
+.item-quantity {
+    border: 1px solid #90a4ae;
+    width: 50px;
+    /* margin: 0 auto; */
+    text-align: center;
+    align-items: center;
 }

@@ -15,13 +15,23 @@ export const listproduct = () => async (dispath) => {
                             name
                             slug
                             description(format: RAW)
-                            shortDescription(format:RAW)  
+                            shortDescription(format:RENDERED)  
                             featured
                             reviewCount
+                            productCategories {
+                              nodes {
+                                name
+                                slug
+                              }
+                            }
                             image {
                               sourceUrl
                             }
-                            
+                            galleryImages {
+                              nodes {
+                                sourceUrl
+                              }
+                            }
                             reviews {
                               averageRating
                               nodes {
@@ -39,6 +49,7 @@ export const listproduct = () => async (dispath) => {
                               regularPrice(format: RAW)
                               onSale
                               salePrice(format: RAW)
+                              sku
                             }
                           }
                         }

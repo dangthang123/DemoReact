@@ -15,6 +15,8 @@ import { addtoCartSuccess, fetchDataSuccess } from '../../Redux/Action/Action';
 import { cartReducer } from '../../Redux/Reducer/Reducer';
 // function ProductItem({handleAddtoCart}) {
 function ProductItem(props) {
+    // console.log(props.product
+    // );
     // const dispatch = useDispatch();
     const productList = useSelector((state) => state.cartlist);
     const { loading } = productList;
