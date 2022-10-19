@@ -128,7 +128,6 @@ function CartPageDetali({ items, increaseQuantity, decreaseQuantity, deleteItemC
         <div>
             <section className="h-100 gradient-custom">
                 <MDBContainer className="py-5 h-100">
-                    {items.numberCart === 0 && <div className='cart-noo'>No Item</div>}
                     <MDBRow className="justify-content-center my-4">
                         <MDBCol md="8">
                             <MDBCard className="mb-4">
@@ -139,7 +138,7 @@ function CartPageDetali({ items, increaseQuantity, decreaseQuantity, deleteItemC
                                 </MDBCardHeader>
                                 <MDBCardBody>
                                     {ListCart.map((item, key) => (
-                                        <MDBRow>
+                                        <MDBRow key={key}>
                                             <MDBCol lg="3" md="12" className="mb-4 mb-lg-0">
                                                 <MDBRipple rippleTag="div" rippleColor="light"
                                                     className="bg-image rounded hover-zoom hover-overlay">
