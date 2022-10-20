@@ -49,6 +49,11 @@
     overflow: hidden;
     position: relative;
     background-color: #ffffff;
+    padding: 0;
+}
+
+.footer-top-item-img a img {
+    width: 100% !important;
 }
 
 .container-footer-top-item hr {
