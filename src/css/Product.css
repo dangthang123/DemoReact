@@ -208,11 +208,14 @@ h2.comment-title {
     top: -17px;
 }
 
-.product-item:hover {
+/* .product-item:hover {
     box-shadow: 5px 8px 24px 5px rgb(107, 107, 112);
     -webkit-box-shadow: 5px 8px 24px 5px rgb(107, 107, 112);
     transform: scale(1.05);
 
+} */
+.product-item-img a img {
+    transform: scale(1.05);
 }
 
 .product-item:hover .product-item-content {
