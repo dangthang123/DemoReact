@@ -214,7 +214,7 @@ h2.comment-title {
     transform: scale(1.05);
 
 } */
-.product-item-img a img {
+.product-item-img a img:hover {
     transform: scale(1.1);
 }
 
