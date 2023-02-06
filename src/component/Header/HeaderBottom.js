@@ -17,10 +17,9 @@ import NotFound from '../Page/NotFound';
 import Productdetail from '../Product/ProductItem/ProductDetalis';
 import WishPageDetali from '../Wish/WishPageDetali';
 import Checkout from '../Page/Checkout/Checkout';
-
-
+import Login from '../Login/Login';
 function HeaderBottom(props) {
-    // console.log(props.items.carts.length);
+    // console.log(props.scrollDirection)
     // ++++ MOBI+++
     const [showMenuMobi, setShowMenuMobi] = useState(true);
 
@@ -59,10 +58,6 @@ function HeaderBottom(props) {
     // ++++ POST (BLOG)+++
     const dispatchPost = useDispatch();
     const post = props.items.post;
-    // console.log(post);
-    // const postList = useSelector((state) => state.cartlist);
-    // const { loadingPost, errorPost, post } = postList;
-    // console.log(productcategory);
     useEffect(() => {
         dispatchPost(listpost());
     }, [dispatchPost])
@@ -76,9 +71,9 @@ function HeaderBottom(props) {
 
     return (
         <div className="header-bottom">
-            <div className="header-bottom-container">
+            <div className={`header-bottom-container ${props.scrollDirection ? 'scroll-menu' : ''}`}>
                 <div className="header-logo">
-                    <Link to=""><li>FRANCO</li></Link>
+                    <Link to=""><img src='https://demo2.posthemes.com/pos_mixy/layout2/img/mixy-responsive-prestashop-theme-logo-1631611858.jpg' alt='#'></img></Link>
                 </div>
 
                 <div className="header-menu">
@@ -87,22 +82,13 @@ function HeaderBottom(props) {
                     </div>
                     {showMenuMobi ?
                         <ul>
-                            <li><Link to="">HOME</Link></li>
-
-                            {productcategory.sort((a, b) => a.id > b.id ? 1 : -1).map((item) => (
-                                <li key={item.id}><Link to={`/${item.slug}`}>{item.name}</Link></li>
-                            )).slice(0, 2)}
-
-                            <li><Link to="/about-us">ABOUT US</Link></li>
-
+                            <li><Link to="">Trang Chủ</Link></li>
+                            <li><Link to="/list">Danh Mục Sản Phẩm</Link></li>
                             {post.sort((a, b) => a.id > b.id ? 1 : -1).map((item) => (
                                 <li key={item.id}> <Link to={`/post/${item.slug}`}>{item.name}</Link></li>
                             )).slice(0, 1)}
-                            {/* {dataMenu.sort((a, b) => a.id < b.id ? 1 : -1).map((item) => (
-                                <li key={item.id}><Link to={`${item.uri}`}>{item.label}</Link></li>
-                            ))} */}
-                            <li><Link to="/collection">COLLECTION</Link></li>
-                            <li><Link to="/contact">CONTACT</Link></li>
+
+                            <li><Link to="/contact">Liên Hệ</Link></li>
 
                             <li>
                                 <div id="search-box">
@@ -149,8 +135,6 @@ function HeaderBottom(props) {
                 <div className="header-Cart-wish">
                     <li className='btn-wish'>
                         <Link to="/Wish"><i className="pe-7s-like" id="Wish"></i>
-                            {/* <span className='wish-number'>{wishItem.length === 0 ? "" : wishItem.length}</span> */}
-                            {/* <span className='wish-number'>{props.numberWish === 0 ? "" : props.numberWish}</span> */}
                             <span className='wish-number'>{props.items.wishs.length === 0 ? "" : props.items.wishs.length}</span>
 
                         </Link>
@@ -158,20 +142,22 @@ function HeaderBottom(props) {
 
                     <li className='btn-cart'>
                         <Link to="/Cart"><i className="pe-7s-cart" id="Cart"></i>
-                            {/* <span className='cart-number'>{cartItem.length === 0 ? "" : cartItem.length}</span> */}
-                            {/* <span className='wish-number'>{props.numberWish === 0 ? "" : props.numberWish}</span> */}
                             <span className='cart-number'>{props.items.carts.length === 0 ? "" : props.items.carts.length}</span>
                         </Link>
                     </li>
 
                 </div>
+                <button className='scroll-top'
+                    onClick={() => window.scrollTo(0, 0)}>
+                    <i className="fa-solid fa-chevron-up"></i>
+                </button>
             </div>
             <Routes>
                 <Route path="" element={<HomePage
                 />}></Route>
 
                 <Route path="*" element={<NotFound to="notfound" />} />
-                {/* <Route path="/*" element={<Navigate to="not-found" />} /> */}
+
 
                 <Route path="/:slug" element={<CategoryPage />}></Route>
 
@@ -180,7 +166,7 @@ function HeaderBottom(props) {
                 <Route path="/contact" element={<ContactPage />}></Route>
                 {/* <Route path="/Search" element={<SearchBox />}></Route> */}
 
-                <Route path="/collection" element={<CollectionPage />}></Route>
+                <Route path="/list" element={<CollectionPage />}></Route>
 
                 <Route path="/:name/:id" element={<Productdetail />}></Route>
 
@@ -193,7 +179,7 @@ function HeaderBottom(props) {
                 <Route path="/Wish" element={<WishPageDetali />}></Route>
 
                 <Route path="/checkout" element={<Checkout />}></Route>
-
+                <Route path='/login' element={<Login />} />
             </Routes>
         </div>
 

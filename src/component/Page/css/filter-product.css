@@ -1,0 +1,116 @@
+.filter-product {
+    background: rgb(255, 255, 255);
+    margin-bottom: 30px;
+}
+
+.filter-product .total-products {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+}
+
+.filter-product .total-products .display {
+    display: inline-flex;
+    margin-right: 25px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0px;
+
+}
+
+.filter-product .total-products .display li {
+    margin-right: 15px;
+    cursor: pointer;
+    color: rgb(28, 30, 34);
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    transition: all 300ms linear 0s;
+}
+
+.filter-product .total-products .display li:last-child {
+    margin-right: 0;
+}
+
+.filter-product .total-products .display li i {
+    font-size: 20px;
+    color: rgb(96, 97, 100);
+}
+
+.filter-product .total-products .display .selected i {
+    color: #15bd68;
+}
+
+.filter-product .total-products .display li:hover i {
+    color: rgb(21, 189, 104);
+}
+
+.filter-product .total-products .hidden-sm-down {
+    margin: 0px;
+}
+
+.filter-product .sort-by-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.filter-product .sort-by-row .sort-by {
+    white-space: nowrap;
+    word-break: break-word;
+    margin-right: -0.9375rem;
+    margin-left: 0.9375rem;
+    text-align: right;
+}
+
+.filter-product .sort-by-row .products-sort-order {
+    max-width: 300px;
+    color: rgb(122, 122, 122);
+    position: relative;
+}
+
+.filter-product .sort-by-row .products-sort-order .select-title {
+    border: none;
+    padding: 5px 15px;
+    line-height: 24px;
+    margin: 0px;
+    border-radius: 5px;
+    color: rgb(28, 30, 34);
+    box-shadow: none;
+    background: rgb(250, 250, 250);
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    text-align: inherit;
+}
+
+.filter-product .sort-by-row .products-sort-order .select-title i {
+    float: right;
+}
+
+.perpage option {
+    font-size: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .filter-product .flex-layout {
+        display: block;
+    }
+
+    .filter-product .flex-layout .total-products {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .filter-product .flex-layout .sort-by-list {
+        width: 100%;
+    }
+
+    .filter-product .flex-layout .sort-by-list .sort-by-row {
+        justify-content: flex-start;
+    }
+
+    .filter-product .sort-by-row .sort-by {
+        display: none;
+    }
+}

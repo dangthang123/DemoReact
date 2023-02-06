@@ -4,13 +4,13 @@ import ProductItem from './ProductItem/Productitem';
 
 // import ProductItem from './ProductItem';
 
-export default function ProductList({ handleAddtoCart }) {
+export default function ProductList({ data }) {
 
     return (
 
         <div className="product-main">
             {/* <ProductItem /> */}
-            <ProductItem handleAddtoCart={handleAddtoCart} />
+            <ProductItem data={data} />
         </div>
 
     )

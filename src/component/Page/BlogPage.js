@@ -14,6 +14,15 @@ function BlogPage(props) {
     useEffect(() => {
         dispatchPost(listpost());
     }, [dispatchPost])
+    useEffect(() => {
+        window.scrollTo(
+            {
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            }
+        )
+    }, [])
     return (
         <div className="container-all">
             <div className='about-blog container'>
@@ -26,8 +35,7 @@ function BlogPage(props) {
                     </div>
                 ) : (
                     <div className="tille-item">
-                        <h4 className="tille-item-1">FRANCO</h4>
-                        <h3 className="tille-item-2">BLOG ITEMS</h3>
+                        <h3 className="tille-item-2">TIN TỨC</h3>
                         <hr className="tille-hr" />
                     </div>
                 )}

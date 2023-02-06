@@ -15,34 +15,30 @@ import { addtoCartSuccess, fetchDataSuccess } from '../../Redux/Action/Action';
 import { cartReducer } from '../../Redux/Reducer/Reducer';
 // function ProductItem({handleAddtoCart}) {
 function ProductItem(props) {
-    // console.log(props.product
-    // );
+
     // const dispatch = useDispatch();
     const productList = useSelector((state) => state.cartlist);
     const { loading } = productList;
-    // console.log(loading);
-    // console.log(products);
-    // useEffect(() => {
-    //     dispatch(listproduct());
-    // }, [dispatch])
-
-
+    let dataProduct = [];
+    if (props.data !== undefined) {
+        dataProduct = props.data
+    }
     const [pageNumber, setPageNumber] = useState(0);
     const usersperPage = 8;
     const pagesVisited = pageNumber * usersperPage;
 
-    const pageCount = Math.ceil(props.product.products.length / usersperPage);
+    const pageCount = Math.ceil(dataProduct.length / usersperPage);
     const onPageChange = ({ selected }) => {
         setPageNumber(selected)
     }
-    const displayUsers = props.product.products.slice(pagesVisited, pagesVisited + usersperPage)
+    const displayUsers = dataProduct.slice(pagesVisited, pagesVisited + usersperPage)
         .map((product) => (
-            <div className="product-item" key={product.id} product={product}  >
+            <div className="product-item col-xl-3" key={product.id} product={product}  >
 
                 {product.image !== null ? (
                     product.onSale === true ? (
                         <div className="product-item-img">
-                            <Link to={`/${product.name}/${product.id}`}><img src={product.image.sourceUrl} alt="" />
+                            <Link to={`/${product.name}/${product.id}`}><img src={product.image.sourceUrl} alt="" className='item-img' />
                                 <img className='logosale' src={imagesale} alt=''></img>
                             </Link>
                             {/* <Link to="/Cart"><button className="product-item-img-btn" onClick={() => handleAddtoCart(product)} >ADD TO CART</button></Link> */}
@@ -50,7 +46,7 @@ function ProductItem(props) {
                         </div>
                     ) : (
                         <div className="product-item-img">
-                            <Link to={`/${product.name}/${product.id}`}><img src={product.image.sourceUrl} alt="" />
+                            <Link to={`/${product.name}/${product.id}`}><img src={product.image.sourceUrl} alt="" className='item-img' />
                             </Link>
                             {/* <Link to="/Cart"><button className="product-item-img-btn" onClick={() => handleAddtoCart(product)} >ADD TO CART</button></Link> */}
                             <Link to="/Cart"><button className="product-item-img-btn" onClick={() => props.addtoCartSuccess(product)} >ADD TO CART</button></Link>
@@ -107,20 +103,31 @@ function ProductItem(props) {
     return (
 
         loading === undefined ? (<ProductSkeleton />) : (
-            <div className="product-list">
-                {displayUsers}
-                <ReactPaginate
-                    previousLabel={<i className="fa-solid fa-chevron-left"></i>}
-                    nextLabel={<i className="fa-solid fa-chevron-right"></i>}
-                    pageCount={pageCount}
-                    onPageChange={onPageChange}
-                    containerClassName={'paginationBttns'}
-                    previousLinkClassName={'previousBttn'}
-                    nextLinkClassName={'nextBttn'}
-                    disabledClassName={'paginationDisabled'}
-                    activeClassName={'paginationActive'}
-                />
+            <div className='row'>
+                <div className="product-list col-md-12">
+                    {displayUsers}
+                    {
+                        dataProduct.length > usersperPage ? (
+                            <ReactPaginate
+                                previousLabel={<i className="fa-solid fa-chevron-left"></i>}
+                                nextLabel={<i className="fa-solid fa-chevron-right"></i>}
+                                pageCount={pageCount}
+                                onPageChange={onPageChange}
+                                containerClassName={'paginationBttns'}
+                                previousLinkClassName={'previousBttn'}
+                                nextLinkClassName={'nextBttn'}
+                                disabledClassName={'paginationDisabled'}
+                                activeClassName={'paginationActive'}
+                            />
+                        ) : (
+                            null
+                        )
+                    }
+
+
+                </div>
             </div>
+
         )
 
 

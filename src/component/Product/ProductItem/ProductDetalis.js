@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 import Rating from "@mui/material/Rating";
 import moment from 'moment/moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -124,6 +124,15 @@ function ProductDetalis(props) {
     }
 
     const [tabIndex, setTabIndex] = useState(0);
+    useEffect(() => {
+        window.scrollTo(
+            {
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            }
+        )
+    }, [])
 
     return (
 

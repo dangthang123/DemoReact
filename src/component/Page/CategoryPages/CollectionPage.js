@@ -31,16 +31,25 @@ function CollectionPage(props) {
         .map((pro) => (
             <div className="product-item" key={pro.id}>
                 <div className="product-item-img">
-                    <img src={pro.image.sourceUrl} alt=''></img>
+                    <img src={pro.image.sourceUrl} alt='' className='cate-img'></img>
                 </div>
                 <div className="product-item-content">
                     <div className="product-item-content-tille">
-                        <p>{pro.name} LIST</p>
+                        <p>{pro.name}</p>
                     </div>
-                    <Link to={`/${pro.slug}`}><p className='onClick'><i className="fa-solid fa-arrow-right-long" style={{ marginLeft: '0px', marginTop: '10px' }}></i>Click to see details</p></Link>
+                    <Link to={`/${pro.slug}`}><p className='onClick'><i className="fa-solid fa-arrow-right-long" style={{ marginLeft: '0px', marginTop: '10px', paddingRight: '5px' }}></i>Xem chi tiết !</p></Link>
                 </div>
             </div>
         ))
+    useEffect(() => {
+        window.scrollTo(
+            {
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            }
+        )
+    }, [])
     return (
         <div className="container-all">
 
@@ -56,8 +65,7 @@ function CollectionPage(props) {
                             </div>
                         ) : (
                             <div className="tille-item">
-                                <h4 className="tille-item-1">FRANCO</h4>
-                                <h3 className="tille-item-2">LIST COLLECTION</h3>
+                                <h3 className="tille-item-2">DANH MỤC SẢN PHẨM</h3>
                                 <hr className="tille-hr" />
                             </div>
                         )}
@@ -68,17 +76,24 @@ function CollectionPage(props) {
                     ) : (
                         <div className="product-list container">
                             {displayUsers}
-                            <ReactPaginate
-                                previousLabel={<i className="fa-solid fa-chevron-left"></i>}
-                                nextLabel={<i className="fa-solid fa-chevron-right"></i>}
-                                pageCount={pageCount}
-                                onPageChange={onPageChange}
-                                containerClassName={'paginationBttns'}
-                                previousLinkClassName={'previousBttn'}
-                                nextLinkClassName={'nextBttn'}
-                                disabledClassName={'paginationDisabled'}
-                                activeClassName={'paginationActive'}
-                            />
+                            {
+                                productcategory.length > usersperPage ? (
+                                    <ReactPaginate
+                                        previousLabel={<i className="fa-solid fa-chevron-left"></i>}
+                                        nextLabel={<i className="fa-solid fa-chevron-right"></i>}
+                                        pageCount={pageCount}
+                                        onPageChange={onPageChange}
+                                        containerClassName={'paginationBttns'}
+                                        previousLinkClassName={'previousBttn'}
+                                        nextLinkClassName={'nextBttn'}
+                                        disabledClassName={'paginationDisabled'}
+                                        activeClassName={'paginationActive'}
+                                    />
+                                ) : (
+                                    null
+                                )
+                            }
+
                         </div>
                     )}
 

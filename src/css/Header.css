@@ -1,9 +1,10 @@
 .header-container-top {
-    background-color: rgb(34, 34, 34);
+    background-color: #184d47;
     width: 100%;
     display: flex;
     justify-content: space-between;
     height: 47px;
+    color: #fff;
 }
 
 .header-container-top-right {
@@ -22,7 +23,7 @@
 
 .header-container-top-right-1 a {
     font-weight: 600;
-    color: #525252;
+    color: #fff;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
 }
@@ -39,7 +40,7 @@
 
 .header-container-top-right-2 a {
     font-weight: 600;
-    color: #525252;
+    color: #fff;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
 }
@@ -50,13 +51,13 @@
 
 #img2 {
     font-size: 14px;
-    color: #525252;
+    color: #fff;
     padding-top: 2.5px;
 }
 
 #img3 {
     font-size: 14px;
-    color: #525252;
+    color: #fff;
     padding-top: 2.5px;
 }
 
@@ -66,7 +67,7 @@
     padding-top: 16px;
     margin-left: 30px;
     padding-bottom: 18px;
-    color: #525252;
+    color: #fff;
     font-size: 14px;
 }
 
@@ -405,4 +406,22 @@ span.wish-number {
     text-align: center;
     color: white;
     border-radius: 50%;
+}
+
+.header-bottom .scroll-top {
+    display: none;
+}
+
+.scroll-menu .scroll-top {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    background-color: #15bd68;
+    border: none;
+    border-radius: 50%;
+
 }

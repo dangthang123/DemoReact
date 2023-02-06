@@ -6,6 +6,7 @@ import CategoryPageAPI from '../Data/CategoryAPI';
 import Footer from '../Footer';
 import { listcategoryproduct } from '../Redux/Api/FecthData';
 import CategoryPageItem from './CategoryPages/CategoryPageItem';
+import FilterProduct from './CategoryPages/FilterProduct';
 
 // import '../../css/Product.css';
 function Categorypage(props) {
@@ -19,6 +20,15 @@ function Categorypage(props) {
         dispatch(listcategoryproduct());
     }, [dispatch])
     const thisTitle = productcategory.find((product) => String(product.slug) === slug) || {};
+    useEffect(() => {
+        window.scrollTo(
+            {
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            }
+        )
+    }, [])
     return (
         <div className="container-all">
             <section>
@@ -33,13 +43,13 @@ function Categorypage(props) {
                             </div>
                         ) : (
                             <div className="tille-item">
-                                <h4 className="tille-item-1">FRANCO</h4>
-                                <h3 className="tille-item-2">LIST {thisTitle.name} ITEMS</h3>
+                                <h3 className="tille-item-2"> {thisTitle.name}</h3>
                                 <hr className="tille-hr" />
                             </div>
                         )}
 
                     </div>
+
                     <CategoryPageItem />
                 </div>
             </section>

@@ -36,14 +36,18 @@ function BlogPageItem(props) {
     }
     const displayUsers = jsonTitle.slice(pagesVisited, pagesVisited + usersperPage)
         .map((blogpage) => (
-            <div className="blog-column" key={blogpage.id}>
+            <div className="blog-column" key={blogpage.id}
+                onClick={() => window.scrollTo(0, 0)}>
                 <div className="blog-card">
                     <div className="containers">
-                        <h3 className="blog-title">{blogpage.title}</h3>
-                        <p dangerouslySetInnerHTML={{ __html: blogpage.content }} />
+                        <h3 className="blog-title"
+                            onClick={() => window.scrollTo(0, 0)}>{blogpage.title}</h3>
+                        <p dangerouslySetInnerHTML={{ __html: blogpage.content }}
+                            onClick={() => window.scrollTo(0, 0)}
+                        />
 
                     </div>
-                    <Link to={`/posts/${blogpage.title}`} ><p className='onClick'><i className="fa-solid fa-arrow-right-long" style={{ marginRight: '3px' }}></i>Click to see details</p></Link>
+                    <Link to={`/posts/${blogpage.title}`} ><p className='onClick'><i className="fa-solid fa-arrow-right-long" style={{ marginRight: '3px' }}></i>Xem chi tiết !</p></Link>
 
                 </div>
             </div>
@@ -52,17 +56,24 @@ function BlogPageItem(props) {
         loadingPost === undefined ? (<PostSkeleton />) : (
             <div className="blog-row">
                 {displayUsers}
-                <ReactPaginate
-                    previousLabel={<i className="fa-solid fa-chevron-left"></i>}
-                    nextLabel={<i className="fa-solid fa-chevron-right"></i>}
-                    pageCount={pageCount}
-                    onPageChange={onPageChange}
-                    containerClassName={'paginationBttns'}
-                    previousLinkClassName={'previousBttn'}
-                    nextLinkClassName={'nextBttn'}
-                    disabledClassName={'paginationDisabled'}
-                    activeClassName={'paginationActive'}
-                />
+                {
+                    jsonTitle.length > usersperPage ? (
+                        <ReactPaginate
+                            previousLabel={<i className="fa-solid fa-chevron-left"></i>}
+                            nextLabel={<i className="fa-solid fa-chevron-right"></i>}
+                            pageCount={pageCount}
+                            onPageChange={onPageChange}
+                            containerClassName={'paginationBttns'}
+                            previousLinkClassName={'previousBttn'}
+                            nextLinkClassName={'nextBttn'}
+                            disabledClassName={'paginationDisabled'}
+                            activeClassName={'paginationActive'}
+                        />
+                    ) : (
+                        null
+                    )
+                }
+
             </div>
         )
 

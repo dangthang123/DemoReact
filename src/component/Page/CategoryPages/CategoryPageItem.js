@@ -9,6 +9,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { listcategoryproduct } from '../../Redux/Api/FecthData';
 import ProductSkeleton from '../Loading/ProductSkeleton';
 import { addtoCartSuccess } from '../../Redux/Action/Action';
+import FilterProduct from './FilterProduct';
 function WomenPageItem(props) {
     const { slug } = useParams();
     const productcategory = props.product.productcategory;
@@ -20,28 +21,56 @@ function WomenPageItem(props) {
         dispatch(listcategoryproduct());
     }, [dispatch])
     const thisProduct = productcategory.find((product) => String(product.slug) === slug) || {};
-    // console.log(thisProduct);
     let jsonProduct = [];
     if (thisProduct !== null && thisProduct.products !== undefined) {
-        // jsonProduct = JSON.stringify(thisProduct.products.nodes);
-        // console.log(jsonProduct);
         jsonProduct = thisProduct.products.nodes;
     }
+
+    const [showGird, setshowGrid] = useState('grid')
+    const handClickShowGrid = (event) => {
+        if (showGird == 'grid') {
+            setshowGrid('grid')
+        } else {
+            setshowGrid('grid');
+            event.stopPropagation();
+        }
+    };
+    const handClickShowList = (event) => {
+        if (showGird == 'list') {
+            setshowGrid('list')
+        } else {
+            setshowGrid('list');
+            event.stopPropagation();
+        }
+    };
+    const [dataProduct, setdataProduct] = useState(jsonProduct)
+    console.log(dataProduct);
+    const lengthProduct = dataProduct.length;
+    const sortPlayers = (selectEvent) => {
+        const options = {
+            "nameaz": [...dataProduct].sort((a, b) => (a.name < b.name ? -1 : 1)),
+            "nameza": [...dataProduct].sort((a, b) => (a.name > b.name ? -1 : 1)),
+            "pricelowtohigh": [...dataProduct].sort((a, b) => (a.regularPrice < b.regularPrice ? -1 : 1)),
+            "pricehightolow": [...dataProduct].sort((a, b) => (a.regularPrice > b.regularPrice ? -1 : 1)),
+        };
+        setdataProduct(options[selectEvent.target.value]);
+    };
+
 
     const [pageNumber, setPageNumber] = useState(0);
     const usersperPage = 8;         //number of items in a page
     const pagesVisited = pageNumber * usersperPage;
-    const pageCount = Math.ceil(jsonProduct.length / usersperPage);
+    const pageCount = Math.ceil(dataProduct.length / usersperPage);
     const onPageChange = ({ selected }) => {
         setPageNumber(selected)
     }
 
-    const displayUsers = jsonProduct.slice(pagesVisited, pagesVisited + usersperPage)
+    const displayUsers = dataProduct.slice(pagesVisited, pagesVisited + usersperPage)
         .map((categorypage) => (
             <div className="product-item" key={categorypage.id}>
                 {categorypage.image !== null ? (
                     <div className="product-item-img">
-                        <Link to={`/${categorypage.name}/${categorypage.id}`}><img src={categorypage.image.sourceUrl} alt="" /></Link>
+                        <Link to={`/${categorypage.name}/${categorypage.id}`}><img src={categorypage.image.sourceUrl} alt="" className='item-img' /></Link>
 
                         <Link to="/Cart"><button className="product-item-img-btn" onClick={() => props.addtoCartSuccess(categorypage)}>ADD TO CART</button></Link>
                     </div>
@@ -70,14 +99,6 @@ function WomenPageItem(props) {
 
                         )}
                     </div>
-                    {/* 
-                    <div className="product-item-content-icon">
-                        <a href="#"><i className="fa-regular fa-star"></i></a>
-                        <a href="#"><i className="fa-regular fa-star"></i></a>
-                        <a href="#"><i className="fa-regular fa-star"></i></a>
-                        <a href="#"><i className="fa-regular fa-star"></i></a>
-                        <a href="#"><i className="fa-regular fa-star"></i></a>
-                    </div> */}
                     {categorypage.onSale === true ? (
                         <div className="product-item-content-price">
                             <p id="text-brick" style={{ textDecoration: 'line-through', color: '#cfcfcf' }}>̶${categorypage.regularPrice}.00</p>
@@ -91,22 +112,48 @@ function WomenPageItem(props) {
                 </div>
             </div>
         ))
+    useEffect(() => {
+        window.scrollTo(
+            {
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            }
+        )
+    }, [])
     return (
         loading === undefined ? (<ProductSkeleton />) : (
-            <div className="product-list">
-                {displayUsers}
-                <ReactPaginate
-                    previousLabel={<i className="fa-solid fa-chevron-left"></i>}
-                    nextLabel={<i className="fa-solid fa-chevron-right"></i>}
-                    pageCount={pageCount}
-                    onPageChange={onPageChange}
-                    containerClassName={'paginationBttns'}
-                    previousLinkClassName={'previousBttn'}
-                    nextLinkClassName={'nextBttn'}
-                    disabledClassName={'paginationDisabled'}
-                    activeClassName={'paginationActive'}
+            <div className='product-list-main'>
+                <FilterProduct
+                    showGird={showGird}
+                    handClickShowGrid={handClickShowGrid}
+                    handClickShowList={handClickShowList}
+                    sortPlayers={sortPlayers}
+                    lengthProduct={lengthProduct}
                 />
+                <div className={`product-list ${showGird == 'grid' ? 'grid-list' : ''}`}>
+                    {displayUsers}
+                    {
+                        jsonProduct.length > usersperPage ? (
+                            <ReactPaginate
+                                previousLabel={<i className="fa-solid fa-chevron-left"></i>}
+                                nextLabel={<i className="fa-solid fa-chevron-right"></i>}
+                                pageCount={pageCount}
+                                onPageChange={onPageChange}
+                                containerClassName={'paginationBttns'}
+                                previousLinkClassName={'previousBttn'}
+                                nextLinkClassName={'nextBttn'}
+                                disabledClassName={'paginationDisabled'}
+                                activeClassName={'paginationActive'}
+                            />
+                        ) : (
+                            null
+                        )
+                    }
+
+                </div>
             </div>
+
         )
 
 

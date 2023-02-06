@@ -30,6 +30,7 @@ import {
 } from "mdb-react-ui-kit";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 // function CartPageDetali({ items, cartItem, handleAddtoCart, handleRemovetoCart, handleCleartoCart, handleRemoveItem }) {
 
 function CartPageDetali({ items, increaseQuantity, decreaseQuantity, deleteItemCart, deleteAllCart, checkoutItem, addtoCartSuccess }) {
@@ -123,7 +124,15 @@ function CartPageDetali({ items, increaseQuantity, decreaseQuantity, deleteItemC
     //         console.log(error.response.data);
 
     //     });
-
+    useEffect(() => {
+        window.scrollTo(
+            {
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            }
+        )
+    }, [])
     return (
         <div>
             <section className="h-100 gradient-custom">

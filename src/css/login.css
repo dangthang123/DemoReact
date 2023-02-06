@@ -1,0 +1,228 @@
+.page-customer-account #content {
+    box-shadow: none;
+    border: 1px solid #e5e5e5;
+    color: #1c1e22;
+    padding: 30px;
+}
+
+.page-customer-account .login-form {
+    margin-top: 15px;
+}
+
+.page-customer-account .form-group {
+    margin-bottom: 1rem;
+}
+
+.page-customer-account #content .forgot-password {
+    text-align: center;
+    margin-top: 1rem;
+    padding-bottom: 0.9375rem;
+}
+
+.form-control-label {
+    text-align: left;
+    color: #1c1e22;
+    padding-top: 0.625rem;
+}
+
+.form-control {
+    padding: 8px 15px;
+    border: 1px solid #e5e5e5;
+    background-color: #f5f5f5;
+    color: #1c1e22;
+    background: #f1f1f1;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.25;
+    border-radius: 0;
+}
+
+.input-group .input-group-btn>.btn {
+    background: #7a7a7a;
+    z-index: 3;
+    padding: 12.5px 20px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: .6875rem;
+    font-weight: 400;
+    margin-left: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.form-control:focus {
+    box-shadow: unset;
+}
+
+.page-customer-account #content .no-account {
+    text-align: center;
+    font-size: 1rem;
+}
+
+.form-footer button {
+    margin-top: 20px;
+}
+
+.form-footer button#submit-login:hover {
+    background: #15bd68;
+}
+
+footer.form-footer.text-sm-center {
+    text-align: center;
+}
+
+.forgotten-password {
+    padding: 4px;
+}
+
+.send-renew-password-link {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+}
+
+.forgotten-password .form-fields .center-email-fields {
+    justify-content: center;
+    display: flex;
+    -webkit-box-pack: center;
+}
+
+.forgotten-password .form-fields label.required {
+    width: 130px;
+}
+
+.forgotten-password .form-fields .email {
+    padding-left: 0;
+    padding-right: 0;
+    width: 430px;
+}
+
+.forgotten-password .form-fields .center-email-fields button {
+    height: 38px;
+    padding: 0 20px;
+}
+
+.page-footer .account-link {
+    margin-right: 1rem;
+}
+
+.page-footer .account-link i {
+    font-size: 1rem;
+}
+
+.forgotten-password .form-fields .email input {
+    height: 38px;
+}
+
+button.form-control-submit.btn.btn-primary.hidden-xs-up {
+    display: none;
+}
+
+button.form-control-submit.btn.btn-primary.hidden-xs-down:hover,
+button.form-control-submit.btn.btn-primary.hidden-xs-up:hover {
+    background: #15bd68;
+}
+
+label.col-md-3.form-control-label.required {
+    padding-left: 10px;
+}
+
+.form-control-comment {
+    font-size: 13px;
+    padding-top: 0.5rem;
+    color: #7a7a7a;
+}
+
+.custom-checkbox {
+    position: relative;
+    display: flex;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    margin-right: 3px;
+    display: inline-block;
+    width: 0.9375rem;
+    height: 0.9375rem;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 2px solid #232323;
+}
+
+.form-footer {
+    text-align: center;
+}
+
+.form-footer button.btn.btn-primary.form-control-submit.float-xs-right:hover {
+    background: #15bd68;
+}
+
+.ps-alert-success {
+    padding: 0.25rem 0.25rem 2.75rem;
+}
+
+.ps-alert-success .item {
+    border-color: #4cbb6c;
+    background-color: #4cbb6c;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    border: 2px solid #ff4c4c;
+    -webkit-box-align: center;
+}
+
+.ps-alert-success .item i {
+    width: 55px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-color: #4cbb6c;
+    display: flex;
+}
+
+.ps-alert-success .item i svg {
+    background-color: #4cbb6c;
+    width: 24px;
+    height: 24px;
+}
+
+.ps-alert-error .item p,
+.ps-alert-success .item p {
+    background-color: #fff;
+    margin: 0;
+    padding: 18px 20px;
+    width: 100%;
+}
+
+button.btn.btn-primary.form-control-submit.float-xs-right:hover {
+    background-color: #4cbb6c;
+}
+
+@media (max-width: 767px) {
+    .forgotten-password .form-fields .email {
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 100%;
+    }
+
+    .forgotten-password .form-fields .center-email-fields {
+        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+    }
+
+    .forgotten-password .form-fields .center-email-fields button {
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+}
+
+@media (max-width: 575px) {
+    button.form-control-submit.btn.btn-primary.hidden-xs-down {
+        display: none;
+    }
+
+    button.form-control-submit.btn.btn-primary.hidden-xs-up {
+        display: block;
+    }
+}

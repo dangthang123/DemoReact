@@ -69,7 +69,8 @@ function FooterSliderItem(props) {
         <div className="slide-main container">
             <Slider {...settings}>
                 {footersliderlist.map(slider => (
-                    <div className="container-footer-top-list container" key={slider.id}>
+                    <div className="container-footer-top-list container" key={slider.id}
+                        onClick={() => window.scrollTo(0, 0)}>
                         <div className="container-footer-top-item container">
                             <div className="footer-top-item-img">
                                 {slider.featuredImage !== null ? (
